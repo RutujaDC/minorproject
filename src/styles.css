@@ -1,0 +1,391 @@
+/* Styles for Login Component */
+/* Set the body background using the provided image link */
+body {
+    background-image: url('https://jooinn.com/images/cloudy-sky-69.png');
+    background-size: cover; /* Ensures the image covers the entire body */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
+    height: 100vh; /* Full height */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the login container */
+    align-items: center; /* Center the login container */
+}
+/* Container for the login form */
+.login-container {
+    width: 400px; /* Set a specific width for the login box */
+    height: 300px; /* Set a specific height for the login box */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.4); /* Light white background with 80% transparency */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Align content in a column */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+/* Hover effect for login container */
+.login-container:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow effect */
+}
+
+/* Style for the login header */
+.login-header {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the login form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-form input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.login-form input:focus {
+    border-color: #4CAF50; /* Green border when input is focused */
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #1976D2;
+}
+
+/* Container styles */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150vh;
+    height: 80vh;
+    background-color: rgba(9, 51, 94, 0.5); /* Dark blue background with 80% opacity */
+    border-radius: 10px; /* Slight rounding of the edges */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+/* Container hover effect */
+.home-container:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+
+/* Header styles */
+.home-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Button container styles */
+.home-buttons {
+    color: #fff;
+    text-align: center;
+}
+
+/* Button styles */
+.home-buttons button {
+    background-color: #1976D2; /* Blue color */
+    color: white;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.home-buttons button:hover {
+    background-color: #0b5bb5; /* Darker blue */
+}
+
+/* Register button styles */
+.home-buttons button:first-of-type {
+    background-color: #4CAF50; /* Green color for register */
+}
+
+/* Register button hover effect */
+.home-buttons button:first-of-type:hover {
+    background-color: #388E3C; /* Darker green */
+}
+/* Container for the register form */
+.register-container {
+    width: 400px; /* Set a specific width for the register box */
+    height: 300px; /* Set a specific height for the register box */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.4); /* Light white background with 80% transparency */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Align content in a column */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+/* Hover effect for register container */
+.register-container:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow effect */
+}
+
+/* Style for the register header */
+.register-header {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the register form */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.register-form input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.register-form input:focus {
+    border-color: #4CAF50; /* Green border when input is focused */
+}
+
+.register-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+    background-color: #1976D2;
+}
+/* Styles for the Dashboard Component */
+
+/* Container for the dashboard */
+.dashboard-container {
+    width: 400px; /* Set a specific width for the dashboard box */
+    height: 300px; /* Set a specific height for the dashboard box */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Light white background with transparency */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Align content in column */
+    align-items: center; /* Center content */
+    justify-content: center; /* Center content vertically */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+/* Hover effect for dashboard container */
+.dashboard-container:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow effect */
+}
+
+/* Style for the dashboard header */
+.dashboard-header {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the dashboard buttons */
+.dashboard-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.dashboard-buttons button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-buttons button:hover {
+    background-color: #1976D2;
+}
+/* Styles for the Upload Component */
+
+/* Container for the upload form */
+.upload-container {
+    width: 400px; /* Set a specific width for the upload box */
+    height: 200px; /* Set a specific height for the upload box */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Light white background with transparency */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Align content in column */
+    align-items: center; /* Center content */
+    justify-content: center; /* Center content vertically */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover effect */
+}
+
+/* Hover effect for upload container */
+.upload-container:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow effect */
+}
+
+/* Style for the upload header */
+.upload-header {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the file input and button */
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.upload-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.upload-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-form button:hover {
+    background-color: #1976D2;
+}
+
+/* Style for the upload status */
+.upload-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #333;
+}
+/* Container for the DownloadFile component */
+.download-file-container {
+    width: 400px; /* Specific width for the container */
+    height: 300px; /* Specific height for the container */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Light white background with transparency */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for the header */
+.download-file-header {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style for the select element */
+.download-file-select {
+    width: 95%; /* Adjust width */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Style for the button */
+.download-file-button {
+    width: 100%; /* Full width button */
+    padding: 10px;
+    background-color: #2196F3; /* Blue background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Button hover effect */
+.download-file-button:hover {
+    background-color: #1976D2; /* Darker blue on hover */
+}
+/* Styles for the dropdown */
+.download-file-select {
+    width: 95%; /* Adjust width */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    outline: none;
+    background-color: #f5f5f5; /* Light background color */
+    color: #333; /* Text color */
+    font-size: 1rem; /* Font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+/* Dropdown hover effect */
+.download-file-select:hover {
+    border-color: #4CAF50; /* Change border color on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+}
+
+/* Option styles (only if needed) */
+.download-file-select option {
+    padding: 10px; /* Add padding for better spacing */
+    font-size: 1rem; /* Font size */
+    color: #333; /* Text color */
+}

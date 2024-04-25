@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Import getAuth and signInWithEmailAndPassword
 import { app } from '../firebase'; // Import app from your firebase.js file
-import {Link,useNavigate} from "react-router-dom";
+import '../styles.css';
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate =useNavigate();
-  //const history = useHistory();
+  const navigate = useNavigate();
+  const handleRegisterClick = () => {
+    navigate('/Register');
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,13 +32,32 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="login-container">
+      <h2 className="login-header">Login</h2>
       {error && <p>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <form onSubmit={handleLogin} className="login-form">
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit">Login</button>
+        <div>
+          <p>if not registered?</p>
+          <button
+        onClick={handleRegisterClick}
+        className="button-blue" // Apply the CSS class
+      >
+        Register
+      </button>
+        </div>
       </form>
     </div>
   );

@@ -4,19 +4,20 @@ import axios from 'axios';
 function Upload() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
+    const [ipfsHash, setIpfsHash] = useState('');
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
 
-    const handleUpload = async () => {
+    const uploadToOwnCloud = async () => {
         try {
             if (!selectedFile) {
                 throw new Error('Please select a file');
             }
 
-            const username = 'root';
-            const password = '1234';
+            const username = 'root'; // Replace with your ownCloud username
+            const password = '1234'; // Replace with your ownCloud password
             const webDAVEndpoint = 'http://localhost/remote.php/dav/files/' + username + '/' + selectedFile.name;
             const authString = btoa(username + ':' + password);
             const headers = {
@@ -26,19 +27,62 @@ function Upload() {
 
             const response = await axios.put(webDAVEndpoint, selectedFile, { headers });
 
-            console.log('File uploaded successfully:', response.data);
-            setUploadStatus('File uploaded successfully');
+            console.log('File uploaded successfully to OwnCloud:', response.data);
+            return response.data;
         } catch (error) {
-            if (error.response) {
-                console.error('File upload failed:', error.response.data);
-                setUploadStatus('File upload failed: ' + error.response.data);
-            } else if (error.message) {
-                console.error('File upload failed:', error.message);
-                setUploadStatus('File upload failed: ' + error.message);
-            } else {
-                console.error('File upload failed:', error);
-                setUploadStatus('File upload failed');
-            }
+            console.error('Error uploading file to OwnCloud:', error);
+            throw error;
+        }
+    };
+
+    const createMetadataFile = async (username, filename) => {
+        try {
+            const metadata = {
+                username: username,
+                filename: filename,
+                timestamp: new Date().toISOString(),
+                action: 'upload'
+            };
+
+            const jsonData = JSON.stringify(metadata);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            return new File([blob], 'metadata.json', { type: 'application/json' });
+        } catch (error) {
+            console.error('Error creating metadata file:', error);
+            throw error;
+        }
+    };
+
+    const uploadToIPFS = async (fileContent) => {
+        try {
+            const formData = new FormData();
+            formData.append('file', fileContent);
+
+            const ipfsUrl = 'http://127.0.0.1:5001/api/v0/add';
+            const response = await axios.post(ipfsUrl, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            console.log('File uploaded to IPFS:', response.data);
+            return response.data.Hash;
+        } catch (error) {
+            console.error('Error uploading file to IPFS:', error);
+            throw error;
+        }
+    };
+
+    const handleUpload = async () => {
+        try {
+            const ownCloudResponse = await uploadToOwnCloud();
+            const metadataFile = await createMetadataFile('root', selectedFile.name); // Assuming 'root' is the username
+            const ipfsHash = await uploadToIPFS(metadataFile);
+            setIpfsHash(ipfsHash);
+            setUploadStatus('File uploaded to OwnCloud, and metadata uploaded successfully to IPFS.');
+        } catch (error) {
+            console.error('Error handling upload:', error);
+            setUploadStatus('Error uploading file.');
         }
     };
 
@@ -50,6 +94,7 @@ function Upload() {
                 <button onClick={handleUpload}>Upload</button>
             </div>
             {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
+            {ipfsHash && <p className="ipfs-hash">IPFS Hash: {ipfsHash}</p>}
         </div>
     );
 }

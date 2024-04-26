@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
+
 import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
@@ -10,6 +11,7 @@ import DownloadFile from './components/DownloadFile';
 import { AuthProvider } from './components/AuthContext';
 import './styles.css'
 function App() {
+   
     return (
         <AuthProvider>
             <Router>

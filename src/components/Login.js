@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Import getAuth and signInWithEmailAndPassword
-import { app } from '../firebase'; // Import app from your firebase.js file
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from '../firebase';
 import '../styles.css';
 
 function Login() {
@@ -16,15 +16,14 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const auth = getAuth(app); // Get the auth instance from the Firebase app
-      await signInWithEmailAndPassword(auth, email, password); // Use signInWithEmailAndPassword method
+      const auth = getAuth(app);
+      await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in successfully');
       setError('');
       navigate('/Dashboard');
     } catch (error) {
       setError(error.message);
       console.error('Login failed:', error.message);
-      // If user is not registered, redirect to Register.js
       if (error.code === 'auth/user-not-found') {
         navigate('/Register');
       }
@@ -38,6 +37,7 @@ function Login() {
       <form onSubmit={handleLogin} className="login-form">
         <input
           type="email"
+          id="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -52,11 +52,11 @@ function Login() {
         <div>
           <p>if not registered?</p>
           <button
-        onClick={handleRegisterClick}
-        className="button-blue" // Apply the CSS class
-      >
-        Register
-      </button>
+            onClick={handleRegisterClick}
+            className="button-blue"
+          >
+            Register
+          </button>
         </div>
       </form>
     </div>

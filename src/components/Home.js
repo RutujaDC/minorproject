@@ -4,7 +4,7 @@ import '../styles.css';
 function Home() {
     return (
         <div className="home-container">
-            <h1 className="home-header">Welcome to Home Page</h1>
+            <h1 className="home-header">Welcome to ownCloud Application!</h1>
             <div className="home-buttons">
                 <h2>Register or Login</h2>
                 <div>

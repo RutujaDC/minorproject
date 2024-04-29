@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
-function Upload() {
+let n;
+function Upload({ email }) {
+    n={email};
+    console.log(n);
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
     const [ipfsHash, setIpfsHash] = useState('');
@@ -35,15 +37,15 @@ function Upload() {
         }
     };
 
-    const createMetadataFile = async (username, filename) => {
+    const createMetadataFile = async (email, filename) => { // Corrected function signature
         try {
             const metadata = {
-                username: username,
+                username: email, // Assign email directly to the username field
                 filename: filename,
                 timestamp: new Date().toISOString(),
                 action: 'upload'
             };
-
+    
             const jsonData = JSON.stringify(metadata);
             const blob = new Blob([jsonData], { type: 'application/json' });
             return new File([blob], 'metadata.json', { type: 'application/json' });
@@ -52,7 +54,7 @@ function Upload() {
             throw error;
         }
     };
-
+    
     const uploadToIPFS = async (fileContent) => {
         try {
             const formData = new FormData();
@@ -73,19 +75,19 @@ function Upload() {
         }
     };
 
-    const handleUpload = async () => {
-        try {
-            const ownCloudResponse = await uploadToOwnCloud();
-            const metadataFile = await createMetadataFile('root', selectedFile.name); // Assuming 'root' is the username
-            const ipfsHash = await uploadToIPFS(metadataFile);
-            setIpfsHash(ipfsHash);
-            setUploadStatus('File uploaded to OwnCloud, and metadata uploaded successfully to IPFS.');
-        } catch (error) {
-            console.error('Error handling upload:', error);
-            setUploadStatus('Error uploading file.');
-        }
-    };
-
+    
+const handleUpload = async () => {
+    try {
+        const ownCloudResponse = await uploadToOwnCloud();
+        const metadataFile = await createMetadataFile(email, selectedFile.name); // Pass email directly
+        const ipfsHash = await uploadToIPFS(metadataFile);
+        setIpfsHash(ipfsHash);
+        setUploadStatus('File uploaded to OwnCloud, and metadata uploaded successfully to IPFS.');
+    } catch (error) {
+        console.error('Error handling upload:', error);
+        setUploadStatus('Error uploading file.');
+    }
+};
     return (
         <div className="upload-container">
             <h2 className="upload-header">Upload File</h2>

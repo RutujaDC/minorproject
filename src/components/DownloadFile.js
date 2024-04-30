@@ -1,74 +1,155 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const DownloadFile = () => {
-    const [fileList, setFileList] = useState([]);
-    const [selectedFile, setSelectedFile] = useState('');
+function DownloadFile({ email }) {
+  const [files, setFiles] = useState([]);
+  const [error, setError] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [ipfsHash, setIpfsHash] = useState('');
 
-    useEffect(() => {
-        // Fetch file list when component mounts
-        fetchFileList();
-    }, []);
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        // Replace 'your-username' and 'your-password' with your ownCloud credentials
+        const username = 'root';
+        const password = '1234'; // Provide your ownCloud password here
+        
+        // Use axios to make a PROPFIND request to the WebDAV endpoint
+        const response = await axios.request({
+          method: 'PROPFIND',
+          url: 'http://localhost/remote.php/dav/files/root/',
+          auth: {
+            username,
+            password
+          },
+          headers: {
+            'Content-Type': 'application/xml'
+          }
+        });
 
-    const fetchFileList = async () => {
-        try {
-            // Make a request to fetch the file list from ownCloud
-            const response = await axios.get('http://localhost/remote.php/dav/files/username/');
-            // Extract file names from the response
-            const files = response.data.match(/<d:displayname>(.*?)<\/d:displayname>/g)
-                .map(match => match.replace(/<\/?d:displayname>/g, ''));
-            setFileList(files);
-        } catch (error) {
-            console.error('Error fetching file list:', error);
+        // Extract file information from the response XML
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(response.data, 'text/xml');
+        const fileNodes = xmlDoc.getElementsByTagName('d:response');
+
+        // Extract file names and hrefs from fileNodes and update state
+        const fileList = Array.from(fileNodes).map(node => {
+          const href = node.getElementsByTagName('d:href')[0].textContent;
+          const fileName = href.substring(href.lastIndexOf('/') + 1); // Extract file name from full path
+          const fullURL = 'http://localhost' + href; // Concatenate with base URL
+          return {
+            name: fileName,
+            href: fullURL
+          };
+        });
+        
+        setFiles(fileList);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchFiles();
+  }, []);
+
+  const handleSelectFile = (fileName) => {
+    const index = selectedFiles.indexOf(fileName);
+    if (index === -1) {
+      setSelectedFiles([...selectedFiles, fileName]);
+    } else {
+      const updatedSelectedFiles = [...selectedFiles];
+      updatedSelectedFiles.splice(index, 1);
+      setSelectedFiles(updatedSelectedFiles);
+    }
+  };
+
+  const handleDownloadSelected = async () => {
+    try {
+      // Replace 'your-username' and 'your-password' with your ownCloud credentials
+      const username = 'root';
+      const password = '1234'; // Provide your ownCloud password here
+
+      // Create an array to store promises for each file download
+      const downloadPromises = selectedFiles.map(async (fileName) => {
+        const file = files.find(file => file.name === fileName);
+        if (file) {
+          // Use axios to make a GET request to download the file using its href
+          const response = await axios.get(file.href, {
+            auth: {
+              username,
+              password
+            },
+            responseType: 'blob', // Set the response type to blob for binary data
+          });
+
+          // Create a download link and trigger download
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', fileName);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          // Create metadata
+          const metadata = {
+            username: email,
+            filename: fileName,
+            timestamp: new Date().toISOString(),
+            action: 'download'
+          };
+          const jsonData = JSON.stringify(metadata);
+          const blob = new Blob([jsonData], { type: 'application/json' });
+          const metadataFile = new File([blob], 'metadata.json', { type: 'application/json' });
+
+          // Upload metadata to IPFS
+          const formData = new FormData();
+          formData.append('file', metadataFile);
+
+          const ipfsUrl = 'http://127.0.0.1:5001/api/v0/add';
+          const ipfsResponse = await axios.post(ipfsUrl, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+
+          // Set IPFS hash
+          setIpfsHash(ipfsResponse.data.Hash);
         }
-    };
+      });
 
-    const handleFileSelect = (event) => {
-        setSelectedFile(event.target.value);
-    };
+      // Wait for all download promises to complete
+      await Promise.all(downloadPromises);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-    const handleDownload = async () => {
-        try {
-            // Download the selected file
-            const response = await axios.get(`http://localhost/remote.php/dav/files/username/${selectedFile}`, {
-                responseType: 'blob', // Set responseType to 'blob' to receive binary data
-            });
-            // Create a URL for the blob data
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            // Create a temporary link element
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', selectedFile);
-            // Simulate a click on the link to trigger the download
-            document.body.appendChild(link);
-            link.click();
-            // Cleanup
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url);
-        } catch (error) {
-            console.error('Error downloading file:', error);
-        }
-    };
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
-    return (
-        <div className="download-file-container">
-            <h2 className="download-file-header">Download File</h2>
-            <select className="download-file-select" onChange={handleFileSelect}>
-                <option value="">Select a file</option>
-                {fileList.map(fileName => (
-                    <option key={fileName} value={fileName}>
-                        {fileName}
-                    </option>
-                ))}
-            </select>
-            <button className="download-file-button" onClick={handleDownload} disabled={!selectedFile}>
-                Download
-            </button>
-            {selectedFile && (
-                <p className="selected-file-text">Selected file: {selectedFile}</p>
-            )}
-        </div>
-    );
-};
+  return (
+    <div>
+      <h2>Files in ownCloud</h2>
+      <ul>
+        {files.map((file, index) => (
+          <li key={index}>
+            <label>
+              <input
+                type="checkbox"
+                checked={selectedFiles.includes(file.name)}
+                onChange={() => handleSelectFile(file.name)}
+              />
+              {file.name}
+            </label>
+          </li>
+        ))}
+      </ul>
+      <button onClick={handleDownloadSelected}>Download Selected</button>
+      {ipfsHash && <p>IPFS Hash: {ipfsHash}</p>}
+    </div>
+  );
+}
 
 export default DownloadFile;

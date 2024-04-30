@@ -12,9 +12,14 @@ import './styles.css';
 
 function App() {
     const [email, setEmail] = useState('');
+    const [ipfsHash, setIpfsHash] = useState('');
 
     const handleEmailChange = (newEmail) => {
         setEmail(newEmail);
+    };
+
+    const handleIpfsHash = (hash) => {
+        setIpfsHash(hash);
     };
 
     return (
@@ -26,9 +31,7 @@ function App() {
                     <Route path="/Login" element={<Login onEmailChange={handleEmailChange} />} />
                     <Route path="/Dashboard" element={<ProtectedRoute element={Dashboard} />} />
                     <Route path="/Upload" element={<Upload email={email} />} />
-
-
-                    <Route path="/DownloadFile" element={<DownloadFile />} />
+                    <Route path="/DownloadFile" element={<DownloadFile email={email} ipfsHash={ipfsHash} />} />
                 </Routes>
             </Router>
         </AuthProvider>

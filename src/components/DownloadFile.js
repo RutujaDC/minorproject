@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles.css';
 
 function DownloadFile({ email }) {
   const [files, setFiles] = useState([]);
@@ -125,17 +126,13 @@ function DownloadFile({ email }) {
     }
   };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
-    <div>
+    <div className="file-list-container">
       <h2>Files in ownCloud</h2>
-      <ul>
+      <ul className="file-list">
         {files.map((file, index) => (
-          <li key={index}>
-            <label>
+          <li key={index} className="file-item">
+            <label className="checkbox-label">
               <input
                 type="checkbox"
                 checked={selectedFiles.includes(file.name)}
@@ -146,8 +143,9 @@ function DownloadFile({ email }) {
           </li>
         ))}
       </ul>
-      <button onClick={handleDownloadSelected}>Download Selected</button>
+      <button className="download-button" onClick={handleDownloadSelected}>Download Selected</button>
       {ipfsHash && <p>IPFS Hash: {ipfsHash}</p>}
+      {error && <p className="error-message">Error: {error}</p>}
     </div>
   );
 }

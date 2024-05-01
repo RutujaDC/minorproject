@@ -12,6 +12,7 @@ function Home() {
                         <button>Register</button>
                     </Link>
                 </div>
+                
                 <div>
                     <Link to="/login">
                         <button>Login</button>

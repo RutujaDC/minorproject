@@ -20,6 +20,10 @@ function Dashboard() {
     const handleDownloadClick = () => {
         navigate('/downloadfile');
     };
+    
+    const handleDeleteClick = () => {
+        navigate('/DeleteFile');
+    };
 
     // Optional: Automatically log out the user after a certain period of inactivity
     useEffect(() => {
@@ -39,6 +43,7 @@ function Dashboard() {
             <div className="dashboard-buttons">
                 <button onClick={handleUploadClick}>Upload File</button>
                 <button onClick={handleDownloadClick}>Download File</button>
+                <button onClick={handleDeleteClick}>Delete File</button>
                 {/* Logout button */}
                 <button onClick={handleLogout}>Logout</button>
             </div>

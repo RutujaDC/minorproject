@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Upload from './components/Upload';
 import DownloadFile from './components/DownloadFile';
 import { AuthProvider } from './components/AuthContext';
+import DeleteFile from './components/DeleteFile';
 import './styles.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                     <Route path="/Dashboard" element={<ProtectedRoute element={Dashboard} />} />
                     <Route path="/Upload" element={<Upload email={email} />} />
                     <Route path="/DownloadFile" element={<DownloadFile email={email} ipfsHash={ipfsHash} />} />
+                    <Route path="/DeleteFile" element={<DeleteFile email={email} />} />
                 </Routes>
             </Router>
         </AuthProvider>

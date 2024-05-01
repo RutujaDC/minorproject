@@ -316,76 +316,94 @@ body {
     font-size: 0.9rem;
     color: #333;
 }
-/* Container for the DownloadFile component */
-.download-file-container {
-    width: 400px; /* Specific width for the container */
-    height: 300px; /* Specific height for the container */
+/* styles.css */
+/* styles.css */
+
+/* Container styles */
+.file-list-container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Light white background with transparency */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Style for the header */
-.download-file-header {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Style for the select element */
-.download-file-select {
-    width: 95%; /* Adjust width */
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-}
-
-/* Style for the button */
-.download-file-button {
-    width: 100%; /* Full width button */
-    padding: 10px;
-    background-color: #2196F3; /* Blue background */
-    color: white; /* White text */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* File list styles */
+  .file-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .file-item {
+    margin-bottom: 10px;
+  }
+  
+  /* Checkbox styles */
+  .checkbox-label {
+    display: block;
+  }
+  
+  /* Button styles */
+  .download-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
-}
+  }
+  
+  /* Button hover effect */
+  .download-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error message styles */
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  /* styles.css */
 
-/* Button hover effect */
-.download-file-button:hover {
-    background-color: #1976D2; /* Darker blue on hover */
-}
-/* Styles for the dropdown */
-.download-file-select {
-    width: 95%; /* Adjust width */
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 5px; /* Rounded corners */
-    outline: none;
-    background-color: #f5f5f5; /* Light background color */
-    color: #333; /* Text color */
-    font-size: 1rem; /* Font size */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-}
-
-/* Dropdown hover effect */
-.download-file-select:hover {
-    border-color: #4CAF50; /* Change border color on hover */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
-}
-
-/* Option styles (only if needed) */
-.download-file-select option {
-    padding: 10px; /* Add padding for better spacing */
-    font-size: 1rem; /* Font size */
-    color: #333; /* Text color */
-}
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
+  }
+  
+  .file-list-container {
+    max-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .file-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .file-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc; /* Separate each file with lines */
+  }
+  
+  .checkbox-label {
+    margin-left: 10px;
+  }
+  
+  .download-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .download-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  

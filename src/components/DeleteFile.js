@@ -4,6 +4,7 @@ import axios from 'axios';
 function DeleteFile({ email }) {
     const [files, setFiles] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [deletedFileName, setDeletedFileName] = useState('');
     const [error, setError] = useState(null);
     const [ipfsHash, setIpfsHash] = useState('');
 
@@ -68,6 +69,8 @@ function DeleteFile({ email }) {
                     }
                 });
 
+                setDeletedFileName(fileName);
+
                 // Create metadata
                 const metadata = {
                     username: email,
@@ -102,24 +105,32 @@ function DeleteFile({ email }) {
 
     return (
         <div>
-            <h2>Files in ownCloud</h2>
-            <ul>
-                {files.map((fileName, index) => (
-                    <li key={index}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={selectedFiles.includes(fileName)}
-                                onChange={() => handleToggleSelect(fileName)}
-                            />
-                            {fileName}
-                        </label>
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleDeleteSelected}>Delete Selected Files</button>
-            {ipfsHash && <p>IPFS Hash: {ipfsHash}</p>}
-            {error && <p>Error: {error}</p>}
+            <div className="file-list-container">
+                <h2>Files in ownCloud</h2>
+                <ul>
+                    {files.map((fileName, index) => (
+                        <li key={index} className="file-item">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedFiles.includes(fileName)}
+                                    onChange={() => handleToggleSelect(fileName)}
+                                />
+                                {fileName}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+                <button className="delete-button" onClick={handleDeleteSelected}>Delete Selected Files</button>
+                {ipfsHash && <p>IPFS Hash: {ipfsHash}</p>}
+                {error && <p>Error: {error}</p>}
+            </div>
+            {deletedFileName && (
+                <div className="notification">
+                    <p>{`${deletedFileName} has been deleted from ownCloud.`}</p>
+                    {ipfsHash && <p>IPFS Hash: {ipfsHash}</p>}
+                </div>
+            )}
         </div>
     );
 }

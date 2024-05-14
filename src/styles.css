@@ -253,10 +253,10 @@ body {
 
 /* Container for the upload form */
 .upload-container {
-    width: 400px; /* Set a specific width for the upload box */
-    height: 200px; /* Set a specific height for the upload box */
+    width: 450px; /* Set a specific width for the upload box */
+    height: 250px; /* Set a specific height for the upload box */
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Light white background with transparency */
+    background-color: rgba(255, 255, 255, 0.7); /* Light white background with transparency */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     display: flex; /* Use flexbox */
@@ -319,91 +319,80 @@ body {
 /* styles.css */
 /* styles.css */
 
-/* Container styles */
+/* styles.css */
+
 .file-list-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* File list styles */
-  .file-list {
-    list-style-type: none;
-    padding: 0;
+    width:1000px;
+    background-color:rgba(255, 255, 255, 0.8); ; /* White background */
+    padding: 20px; /* Add some padding */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   }
   
   .file-item {
-    margin-bottom: 10px;
+    padding: 10px 0; /* Add some vertical padding */
+    border-bottom: 1px solid #e0e0e0; /* Add a bottom border */
   }
   
-  /* Checkbox styles */
-  .checkbox-label {
-    display: block;
+  .file-item:last-child {
+    border-bottom: none; /* Remove bottom border from the last item */
   }
   
-  /* Button styles */
-  .download-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+  .delete-button {
+    background-color: #ff4d4f; /* Red background */
+    color: #ffffff; /* White text color */
+    padding: 10px 20px; /* Add padding */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Add rounded corners */
+    cursor: pointer; /* Add cursor pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
   }
   
-  /* Button hover effect */
-  .download-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Error message styles */
-  .error-message {
-    color: red;
-    margin-top: 10px;
+  .delete-button:hover {
+    background-color: #f5222d; /* Darker red on hover */
   }
   /* styles.css */
 
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
-  }
-  
-  .file-list-container {
-    max-width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .file-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .file-item {
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc; /* Separate each file with lines */
-  }
-  
-  .checkbox-label {
-    margin-left: 10px;
-  }
-  
-  .download-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .download-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .error-message {
-    color: red;
-  }
-  
+.file-list-container {
+  background-color: #ffffff; /* White background */
+  padding: 20px; /* Add some padding */
+  border-radius: 8px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.file-list {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+.file-item {
+  padding: 10px 0; /* Add some vertical padding */
+  border-bottom: 1px solid #e0e0e0; /* Add a bottom border */
+}
+
+.file-item:last-child {
+  border-bottom: none; /* Remove bottom border from the last item */
+}
+
+.checkbox-label {
+  cursor: pointer; /* Change cursor to pointer on hover */
+  display: block; /* Make the label a block element for easier clicking */
+}
+
+.download-button {
+  background-color: #1890ff; /* Blue background */
+  color: #ffffff; /* White text color */
+  padding: 10px 20px; /* Add padding */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Add rounded corners */
+  cursor: pointer; /* Add cursor pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.download-button:hover {
+  background-color: #40a9ff; /* Darker blue on hover */
+}
+
+.error-message {
+  color: #ff4d4f; /* Red error message color */
+}
